@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+        <div class="container">
+            <div class="row gy-3 my-3">
+                {% for donnee in donnees %}
+                <div class="col-md-3">
+                    <div class="card">
+                          <img src="{{ donnee.image.url }}" class="card-img-top" alt="Fissure in Sandstone"/>
+                          <div class="card-body">
+                            <h5 class="card-title">{{ donnee.nom }}</h5>
+                            <span class="card-text"><i>GENRE : {{ donnee.type }}</i></span><br>
+                            <span class="card-text"><i>TYPE : {{ donnee.categorie }}</i></span><br>
+                            <span class="card-text"><i>PROPRIETAIRE : {{ donnee.proprietaire }}</i></span><br>
+                            <a href="detail/{{ donnee.id }}/" class="btn btn-dark">Consulte</a>
+                          </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+{% endblock %}

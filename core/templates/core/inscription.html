@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+<h1>MAIN</h1>
+    <div class="container p-5">
+        {% if err %}
+            <div class="alert alert-danger">{{ err }}</div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                 <label class="form-label" for="form3Example1">First name</label>
+                <input type="text" name="prenom" id="form3Example1" class="form-control" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="form3Example2">Last name</label>
+                <input type="text" name="nom" id="form3Example2" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Username</label>
+            <input type="text" name="pseudo" id="form3Example3" class="form-control" />
+          </div>
+            <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Email address</label>
+            <input type="email" name="email" id="form3Example3" class="form-control" />
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example4">Password</label>
+            <input type="password" name="passwd" id="form3Example4" class="form-control" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mb-4">Inscription</button>
+        </form>
+    </div>
+{% endblock %}

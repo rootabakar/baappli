@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+PROFILE
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1>PROFILE</h1>
+        <a href="/edit-profile/{{ user.id }}/" class="btn btn-dark">MODIFIER SON PROFILE</a>
+        <div class="row gy-3 my-3">
+            {% for publication in publications %}
+                <div class="col-md-3">
+                    <div class="card">
+                          <img src="{{ publication.image.url }}" class="card-img-top" alt="Fissure in Sandstone"/>
+                          <div class="card-body">
+                            <h5 class="card-title">{{ publication.nom }}</h5>
+                            <span class="card-text"><i>GENRE : {{ publication.type }}</i></span><br>
+                            <span class="card-text"><i>TYPE : {{ publication.categorie }}</i></span><br>
+                            <span class="card-text"><i>PROPRIETAIRE : {{ publication.proprietaire }}</i></span><br>
+                            <a href="detail/{{ publication.id }}/" class="btn btn-dark">Mofifie</a>
+                            <a href="/delete/{{ publication.id }}/" class="btn btn-danger">Supprimer</a>
+                          </div>
+                    </div>
+                </div>
+            {% endfor %}
+         </div>
+    </div>
+{% endblock %}

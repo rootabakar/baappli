@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+DETAIL
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <h2>DETAIL</h2>
+    <div class="container">
+            <div class="row gy-3 my-3">
+                <div class="">
+                  <img src="{{ entre.image.url }}" class="card-img-top" alt="Fissure in Sandstone"/>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ donnee.nom }}</h5>
+                    <span class="card-text"><i>GENRE : {{ entre.type }}</i></span><br>
+                    <span class="card-text"><i>GENRE : {{ entre.categorie }}</i></span><br>
+                    <p>{{ entre.description }}</p>
+                  </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

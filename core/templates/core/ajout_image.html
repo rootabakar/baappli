@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    AJOUT
+{% endblock %}
+
+{% block main %}
+    <div class="container p-4">
+        <h1>AJOUTER UNE IMAGE</h1>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-dark">PUBLIER</button>
+        </form> 
+    </div>
+{% endblock %}
