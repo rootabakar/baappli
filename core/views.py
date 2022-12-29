@@ -93,5 +93,5 @@ def delete(request, id):
 
 def edit_profile(request, id):
     user = User.objects.get(id=id)
-    
+
     return render(request, 'core/edit_profile.html', locals())
