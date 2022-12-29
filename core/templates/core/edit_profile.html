@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 EDIT
@@ -8,6 +9,11 @@ EDIT
 
     <div class="container">
         <h1>EDIT PROFILE</h1>
-
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-dark mt-3">MODIFIER</button>
+        </form>
+        <a href="/delete/user/{{ user.id }}/" class="btn btn-danger">Supprimer profile</a>
     </div>
 {% endblock %}

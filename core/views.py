@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model, login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from core.forms import ImageAdd
+from core.forms import ImageAdd, UserUpadate
 from core.models import User, AjoutAnimal
 
 Utilisateur = get_user_model()
@@ -25,7 +26,7 @@ def connexion(request):
             return redirect('index')
         else:
             err = "ERRRRRRRRR LORS DE LA CONNEXION"
-            return redirect('connexion')
+            return render(request, 'core/connexion.html', locals())
     return render(request, 'core/connexion.html', locals())
 
 
@@ -44,7 +45,7 @@ def inscription(request):
         user_exist = User.objects.filter(username=pseudo)
         if user_exist:
             err = "USER EXIST"
-            return redirect('inscription')
+            return render(request, 'core/inscription.html', locals())
         else:
             user = Utilisateur.objects.create_user(
                 username=pseudo,
@@ -59,6 +60,7 @@ def inscription(request):
     return render(request, 'core/inscription.html', locals())
 
 
+@login_required
 def add(request):
     if request.method == 'POST':
         user = User.objects.get(id=request.user.id)
@@ -79,19 +81,48 @@ def detail(request, id):
     return render(request, 'core/detail.html', locals())
 
 
+@login_required
 def profiles(request):
     user = User.objects.get(id=request.user.id)
     publications = AjoutAnimal.objects.filter(proprietaire=user)
     return render(request, 'core/profiles.html', locals())
 
-
+@login_required
 def delete(request, id):
     entre = AjoutAnimal.objects.get(id=id)
     entre.delete()
     return redirect('profile')
 
 
+@login_required
 def edit_profile(request, id):
     user = User.objects.get(id=id)
-
+    if request.method == 'POST':
+        form = UserUpadate(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserUpadate(instance=user)
     return render(request, 'core/edit_profile.html', locals())
+
+
+@login_required
+def edit_publication(request, id):
+    entre = AjoutAnimal.objects.get(id=id)
+    if request.method == 'POST':
+        form = ImageAdd(request.POST, request.FILES, instance=entre)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = ImageAdd(instance=entre)
+    return render(request, 'core/edit_publication.html', locals())
+
+
+@login_required
+def delete_user(request, id):
+    user = User.objects.get(id=id)
+    logout(request)
+    user.delete()
+    return redirect('index')
