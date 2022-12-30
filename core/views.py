@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model, login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-
 from core.forms import ImageAdd, UserUpadate
 from core.models import User, AjoutAnimal
+
 
 Utilisateur = get_user_model()
 
@@ -14,6 +14,8 @@ def index(request):
 
 
 def connexion(request):
+    if request.user.is_authenticated:
+        return redirect('/')
     if request.method == 'POST':
         pseudo = request.POST.get('pseudo')
         passwd = request.POST.get('passwd')
@@ -87,6 +89,7 @@ def profiles(request):
     publications = AjoutAnimal.objects.filter(proprietaire=user)
     return render(request, 'core/profiles.html', locals())
 
+
 @login_required
 def delete(request, id):
     entre = AjoutAnimal.objects.get(id=id)
@@ -126,3 +129,5 @@ def delete_user(request, id):
     logout(request)
     user.delete()
     return redirect('index')
+
+
