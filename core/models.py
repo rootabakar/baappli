@@ -25,7 +25,14 @@ class AjoutAnimal(models.Model):
     categorie = models.CharField(max_length=100, choices=CATEGORIE)
     proprietaire = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+    like = models.IntegerField(default=0, blank=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
         return self.nom
+
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(AjoutAnimal, on_delete=models.CASCADE)
+

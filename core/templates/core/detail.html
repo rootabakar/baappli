@@ -17,6 +17,9 @@ DETAIL
                     <h5 class="card-title">{{ donnee.nom }}</h5>
                     <span class="card-text"><i>GENRE : {{ entre.type }}</i></span><br>
                     <span class="card-text"><i>GENRE : {{ entre.categorie }}</i></span><br>
+                    <span class="card-text"><i>LIKE : {{ entre.like }}</i></span><br>
+                    <a href="/like/{{ entre.id }}/" class="btn btn-dark">LIKE</a><br>
+                    <span>LIKE : {{ entre.like }}</span>
                     <p>{{ entre.description }}</p>
                   </div>
             </div>

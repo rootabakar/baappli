@@ -33,6 +33,6 @@ urlpatterns = [
     path('edit-profile/<int:id>/', edit_profile, name='edit_profile'),
     path('edit-publication/<int:id>/', edit_publication, name='edit_publication'),
     path('delete/user/<int:id>/', delete_user, name='delete_user'),
-
-    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('like/<int:id_image>/', like, name='like'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

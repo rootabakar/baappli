@@ -1,3 +1,6 @@
 from django.contrib import admin
+from core.models import AjoutAnimal, Likes
 
-# Register your models here.
+
+admin.site.register(AjoutAnimal)
+admin.site.register(Likes)

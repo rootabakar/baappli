@@ -2,8 +2,7 @@ from django.contrib.auth import get_user_model, login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from core.forms import ImageAdd, UserUpadate
-from core.models import User, AjoutAnimal
-
+from core.models import User, AjoutAnimal, Likes
 
 Utilisateur = get_user_model()
 
@@ -131,3 +130,19 @@ def delete_user(request, id):
     return redirect('index')
 
 
+def like(request, id_image):
+    user = request.user
+    # user = User.objects.get(id=user)
+    image = AjoutAnimal.objects.get(id=id_image)
+
+    current_like = image.like
+    liked = Likes.objects.filter(user=user, image=image).count()
+    if not liked:
+        liked = Likes.objects.create(user=user, image=image)
+        current_like = current_like + 1
+    else:
+        liked = Likes.objects.filter(user=user, image=image).delete()
+        current_like = current_like - 1
+    image.like = current_like
+    image.save()
+    return redirect('detail', id_image)
