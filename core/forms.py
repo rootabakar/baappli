@@ -8,7 +8,7 @@ class ImageAdd(ModelForm):
     class Meta:
         model = AjoutAnimal
         fields = '__all__'
-        exclude = ('proprietaire', )
+        exclude = ('proprietaire', 'like',)
 
 
 class UserUpadate(ModelForm):
